@@ -1,0 +1,20 @@
+*********************************************************
+*   Tirain						*
+*   insert email here					*
+*   Only change things past colons or it will break	*
+*   	 	       	    	      	      		*
+*							*
+*********************************************************							
+*********************************************************
+
+This is the Input file for the loot simulator.
+
+Time spent killing Wyverns (in minutes): 10000
+
+Average Kill time (in seconds): 30
+
+Number of events you want to run: 100
+
+Bin Size: 100000
+
+*****************************************************
