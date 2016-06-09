@@ -1,20 +1,17 @@
 *********************************************************
-*   Tirain						*
-*   insert email here					*
+*   Matthew Schiavi					*
+*   mmschiav@buffalo.edu				*
 *   Only change things past colons or it will break	*
 *   	 	       	    	      	      		*
 *							*
 *********************************************************							
 *********************************************************
 
-This is the Input file for the loot simulator.
+Symbols: [p,q,k]
 
-Time spent killing Wyverns (in minutes): 10000
+Internal: [1,3,2] 
 
-Average Kill time (in seconds): 30
+External: [9,3,1]
 
-Number of events you want to run: 100
-
-Bin Size: 100000
-
+Propagators: [6,18,32]
 *****************************************************
