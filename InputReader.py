@@ -1,5 +1,6 @@
 from sympy import Symbol
 
+
 class Reader:
 
 
