@@ -9,9 +9,9 @@
 
 Symbols: [p,q,k]
 
-Internal: [1,3,2] 
+Internal: [k] 
 
-External: [9,3,1]
+External: [q,p]
 
-Propagators: [6,18,32]
+Propagators: [(q-k)**2,(p-k)**2,(k)**2]
 *****************************************************
