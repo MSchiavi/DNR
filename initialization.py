@@ -3,9 +3,9 @@ from sympy import *
 One = type(Abs(1)/Abs(1))
 class Initialization(object):
 	#These propagators should be an input when the object is created same with internal
-	#hi
-	Propagators = [(Symbol('k')-Symbol('p'))**2,(Symbol('k')+Symbol('q'))**2,(Symbol('k'))**2]
-	Internal = [Symbol('k')]
+	#work_bench
+	Propagators = [(Symbol('l')+Symbol('p'))**2,(Symbol('k')+Symbol('p'))**2,(Symbol('l')-Symbol('q'))**2,(Symbol('l'))**2,(Symbol('k')-Symbol('l'))**2,(Symbol('k')-Symbol('q'))**2,(Symbol('k'))**2]
+	Internal = [Symbol('k'),Symbol('l')]
 	External = [Symbol('p'), Symbol('q') ]
 
 	def __init__(self):
