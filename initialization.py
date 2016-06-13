@@ -5,7 +5,7 @@ class Initialization(object):
 	#These propagators should be an input when the object is created same with internal
 	Propagators = [(Symbol('k')-Symbol('p'))**2,(Symbol('k')+Symbol('q'))**2,(Symbol('k'))**2]
 	Internal = [Symbol('k')]
-	External = [Symbol('p'), Symbol('q') ]
+	External = [Symbol('p'), Symbol('q')]
 
 	def __init__(self):
 		super(Initialization, self).__init__()
