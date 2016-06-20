@@ -1,12 +1,19 @@
 from math import *
 from sympy import *
+from InputReader import *
+
 One = type(Abs(1)/Abs(1))
 class Initialization(object):
-	#These propagators should be an input when the object is created same with internal
-	Propagators = [(Symbol('k')-Symbol('p'))**2,(Symbol('k')+Symbol('q'))**2,(Symbol('k'))**2]
-	Internal = [Symbol('k')]
-	External = [Symbol('p'), Symbol('q')]
-
+	#creaters reader object from InputReader which reads input file
+	#for internal external and props given in sympy objects
+	_Reader = Reader("input.DAT")
+	inputs = _Reader.Input_filereader()
+	print("************************************************************************")
+	print(inputs,"       Inputed parameters")
+	print("************************************************************************")
+	Internal = inputs[0]
+	Externla = inputs[1]
+	Propagators = inputs[2]
 	def __init__(self):
 		super(Initialization, self).__init__()
 		#print(self.Propagators)

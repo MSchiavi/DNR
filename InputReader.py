@@ -65,8 +65,10 @@ class Reader:
         Symbols = math_list(input_Symbols)
         Internal = math_list(Internal)
         External = math_list(External)
-        print(Props)
-        print(props_list(Props))
+        Propagators = props_list(Props)
+        inputs.append(Internal)
+        inputs.append(External)
+        inputs.append(Propagators)
 
         return inputs
 #replaces some unwanted nonsense from the input file
@@ -114,7 +116,6 @@ def props_list(String):
         plus_count = Propagators[i].count('+')
         Propagators[i] = Propagators[i].replace("(","")
         Propagators[i] = Propagators[i].replace(")","")
-        #print(Propagators[i])
         for j in range(len(Propagators[i])):
             if Propagators[i][j] == '-':
                 minus = j
@@ -125,11 +126,11 @@ def props_list(String):
         Propagators[i] = Propagators[i].replace(Propagators[i][times + 1],"")
         Propagators[i] = Propagators[i].replace("-","")
         Propagators[i] = Propagators[i].replace("*","")
-        print(Propagators)
+        #print(Propagators)
 
 
-        print(minus)
-        print(times)
+        #print(minus)
+        #print(times)
 
         if len(Propagators[i])==1:
             Propagators[i] = Symbol(Propagators[i])**power
@@ -140,6 +141,6 @@ def props_list(String):
 
     return Propagators    
             
-Reader=Reader("input.DAT")
+#Reader=Reader("input.DAT")
 
-Reader.Input_filereader()
+#print(Reader.Input_filereader())
