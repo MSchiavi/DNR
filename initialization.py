@@ -7,6 +7,7 @@ class Initialization(object):
 	#creaters reader object from InputReader which reads input file
 	#for internal external and props given in sympy objects
 	_Reader = Reader("input.DAT")
+	#,_Reader = Reader("working.DAT")
 	inputs = _Reader.Input_filereader()
 	print("************************************************************************")
 	print(inputs,"       Inputed parameters")
@@ -33,23 +34,30 @@ class Initialization(object):
 				temp.append(poly(diff(self.Propagators[j],self.Internal[i],1),self.Internal[i]))
 				coef.append(poly(temp[j],self.Internal[i]).coeffs())
 				coef[i]
-		#This loop loops over the same thins as before but then gets rid of any terms of 
+		#This loop loops over the same things as before but then gets rid of any terms of 
 		#degree 0. it then takes the coeffs of the first term and divides the derivative
 		# term by that term which is then stored in temp
 		for x in range(len(self.Internal)):
 			for y in range(len(temp)):
-				new_temp = small_O_n(temp[y],1)
-				if new_temp.coeffs()[0] != 0:
-					temp[y] = temp[y]/new_temp.coeffs()[0]
-			for z in range(len(temp)):
-				temp[z] = (temp[z] * self.Internal[x]).expand()
-				for i in range(len(temp[z].args)):
-					if type(temp[z].args[i]) is Integer:
-						break	
-					elif temp[z].args[i] is self.Internal[x]:
-						break
-					elif Abs(temp[z].args[i]) not in Squares:
-						Squares.append(Abs(temp[z].args[i]).args[0])
+				print(temp[y].args[0])
+				if temp[y].args[0] == 0:
+					print("hi")
+					continue
+				else:
+					new_temp = small_O_n(temp[y],1)
+					print(temp)
+					print(new_temp)
+					if new_temp.coeffs()[0] != 0:
+						temp[y] = temp[y]/new_temp.coeffs()[0]
+				for z in range(len(temp)):
+					temp[z] = (temp[z] * self.Internal[x]).expand()
+					for i in range(len(temp[z].args)):
+						if type(temp[z].args[i]) is Integer:
+							break	
+						elif temp[z].args[i] is self.Internal[x]:
+							break
+						elif Abs(temp[z].args[i]) not in Squares:
+							Squares.append(Abs(temp[z].args[i]).args[0])
 			Squares = list(set(Squares))
 		return Squares
 	#This method will eventualy return the Matrix which contains the coefficients
