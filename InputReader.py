@@ -110,6 +110,7 @@ def props_list(String):
         times = 0
         number_times = 0
         minus = 0
+        plus = 0
         Open_P = Propagators[i].count('(')
         Close_P = Propagators[i].count(')')
         minus_count = Propagators[i].count('-')
@@ -119,24 +120,28 @@ def props_list(String):
         for j in range(len(Propagators[i])):
             if Propagators[i][j] == '-':
                 minus = j
-            if Propagators[i][j] == '*':
+            elif Propagators[i][j] == '+':
+                plus = j
+            elif Propagators[i][j] == '*':
                 number_times += 1 
                 times = j
         power = int(Propagators[i][times + 1])
         Propagators[i] = Propagators[i].replace(Propagators[i][times + 1],"")
         Propagators[i] = Propagators[i].replace("-","")
+        Propagators[i] = Propagators[i].replace("+","")
         Propagators[i] = Propagators[i].replace("*","")
         #print(Propagators)
 
 
         #print(minus)
         #print(times)
-
         if len(Propagators[i])==1:
             Propagators[i] = Symbol(Propagators[i])**power
         elif len(Propagators[i]) > 1 and len(Propagators[i]) <= 2 :
             if minus != 0 and minus_count == 1:
-                Propagators[i] =(Symbol(Propagators[i][0]) - Symbol(Propagators[i][1]))**power        
+                Propagators[i] =(Symbol(Propagators[i][0]) - Symbol(Propagators[i][1]))**power 
+            if plus != 0 and plus_count == 1:
+                Propagators[i] =(Symbol(Propagators[i][0]) + Symbol(Propagators[i][1]))**power       
 
 
     return Propagators    
