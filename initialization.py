@@ -23,42 +23,52 @@ class Initialization(object):
 	#For example k**2 is a square or k*p is a square. Things that appear in terms such as
 	#(k+p)**2 	
 	def find_squares(self):
-		temp = []
-		coef = []
 		Squares = []
 		#First double loop loops over the internal momenta and then the propagators.
 		#Stores the derivative of each prop with respect to internal in the temp array
 		#The coef of those are then stored in coef array
 		for i in range(len(self.Internal)):
+			temp = []
+			coef = []
 			for j in range(len(self.Propagators)):
 				temp.append(poly(diff(self.Propagators[j],self.Internal[i],1),self.Internal[i]))
 				coef.append(poly(temp[j],self.Internal[i]).coeffs())
-				coef[i]
 		#This loop loops over the same things as before but then gets rid of any terms of 
 		#degree 0. it then takes the coeffs of the first term and divides the derivative
 		# term by that term which is then stored in temp
-		for x in range(len(self.Internal)):
+		#for x in range(len(self.Internal)):
 			for y in range(len(temp)):
-				print(temp[y].args[0])
+			#	print(temp[y].args[0])
 				if temp[y].args[0] == 0:
-					print("hi")
+			#		print("hi")
 					continue
 				else:
+					print(temp[y],"   temp y")
+					print(self.Internal[i])
 					new_temp = small_O_n(temp[y],1)
-					print(temp)
-					print(new_temp)
+			#		print(temp,"    TEMP")
+			#		print(new_temp,"      NEW TEMP")
 					if new_temp.coeffs()[0] != 0:
 						temp[y] = temp[y]/new_temp.coeffs()[0]
-				for z in range(len(temp)):
-					temp[z] = (temp[z] * self.Internal[x]).expand()
-					for i in range(len(temp[z].args)):
-						if type(temp[z].args[i]) is Integer:
-							break	
-						elif temp[z].args[i] is self.Internal[x]:
-							break
-						elif Abs(temp[z].args[i]) not in Squares:
-							Squares.append(Abs(temp[z].args[i]).args[0])
+			#		print(temp,"     temp after division")
+			print(temp, "       FInal temp")
+			for z in range(len(temp)):
+				temp[z] = (temp[z] * self.Internal[i]).expand()
+				for x in range(len(temp[z].args)):
+					if type(temp[z].args[x]) is Integer:
+						break	
+					elif temp[z].args[x] is self.Internal[i]:
+						break
+					elif Abs(temp[z].args[x]) not in Squares:
+						if temp[z].args[x] == 0:
+							continue
+						else:
+							Squares.append(Abs(temp[z].args[x]).args[0])
+			del temp
+			del new_temp
+			del coef
 			Squares = list(set(Squares))
+			print(Squares, "      Squares")
 		return Squares
 	#This method will eventualy return the Matrix which contains the coefficients
 	# of the squares in the expanded propagators, the external squared momenta,
