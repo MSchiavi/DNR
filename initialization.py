@@ -75,19 +75,25 @@ class Initialization(object):
 	# and a row on bottom of just 0's if not col for external and 1 otherwise
 	def External_Matrix(self):
 		Squares = Matrix(self.find_squares())
-		#print(Squares)
-
+		print(Squares, "     Squares")
+		Singleton=[]
 		temp = [[0 for x in range(len(Squares))]for y in range(len(self.Propagators))]
+
 
 
 		for i in range(len(self.Propagators)):
 
-			#print(self.Propagators[i].expand().args,"Propagators")
+			#print(self.Propagators[i].expand().args,"      Propagators")
 
+			#This looks for any singleton props like k**2 and loops over the different args of the props to indentify which is a good square or not
+			# external momenta squares are bad squares. 
 			for j in range(len(self.Propagators[i].expand().args)):
 				for y in range(len(self.Internal)):
 					if self.Propagators[i].expand().args[j] == self.Internal[y] or type(self.Propagators[i].expand().args[j]) == Integer:
-						Singleton = [True,i]
+						Singleton.append([True,i])
+					else:
+						Singleton.append([False,i])
+				#This loop fills the matrix rows are the propagators in order of the input file and col is squares in order of the Squares list
 				for k in range(len(Squares)):
 
 					#print(self.Propagators[i].expand().args[j],Squares[k],i,k,self.Propagators[i].expand().args[j]/Squares[k])
@@ -95,36 +101,39 @@ class Initialization(object):
 					if type(self.Propagators[i].expand().args[j]/Squares[k]) is One or type(self.Propagators[i].expand().args[j]/Squares[k]) is Integer:
 						#print("added",self.Propagators[i].expand().args[j]/Squares[k])
 						temp[i][k] = (self.Propagators[i].expand().args[j]/Squares[k])
-						
-		if Singleton[0] == True:
-			for i in range(len(Squares)):
-				if Squares[i] == self.Propagators[Singleton[1]]:
-					temp[Singleton[1]][i] = 1
-				else:
-					temp[Singleton[1]][i] = 0
+		
 
-		#print(temp,"Temp")
+			for x in range(len(Singleton)):
+				if Singleton[x][0] == True:
+					for i in range(len(Squares)):
+						if Squares[i] == self.Propagators[Singleton[x][1]]:
+							temp[Singleton[x][1]][i] = 1
+						else:
+							temp[Singleton[x][1]][i] = 0
+
+		print(temp,"       Temp")
+
 
 		TSquares = Matrix(temp)*Squares
-		#print(TSquares,"TSquares is temp after dot with squares")
+		#print(TSquares,"         TSquares is temp after dot with squares")
 
 		External_Vec = Matrix(self.Propagators) - TSquares
 		for i in range(len(External_Vec)):
 			External_Vec[i] = External_Vec[i].expand()
-		#print(External_Vec,"External_Vec after diff with props - temp")
+		#print(External_Vec,"             External_Vec after diff with props - temp")
 
-
-		Final_Mat = Matrix(temp).col_insert(3,External_Vec)
+		# insert after the last column
+		Final_Mat = Matrix(temp).col_insert(Matrix(temp).shape[1],External_Vec)
+		#print(Final_Mat,"           Final_Mat")
 		bot_row = [0 for x in range(len(temp)+1)]
 		#print(bot_row)
-		for i in range(len(temp)+1):
-			if i < len(temp):
+		for i in range(Matrix(temp).shape[1] + 1):
+			if i < Matrix(temp).shape[0]:
 				bot_row[i] = 0
 			else:
 				bot_row[i] = 1
-		Final_Mat = Final_Mat.row_insert(3,Matrix([bot_row]))
-
-		#print(Final_Mat,"Final_Mat")
+		Final_Mat = Final_Mat.row_insert(7,Matrix([bot_row]))
+		print(Final_Mat,"            Final_Mat")
 
 		Final_Mat_Inv = Final_Mat**-1
 
