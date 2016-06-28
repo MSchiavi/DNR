@@ -1,3 +1,15 @@
+#    Author: Matthew Schiavi
+#	 Last Edit: 06-27-16
+#
+#	Based off of the Internal, External, and propagators which are inputed in the input file this generates the matrix to produce
+#	IBPS
+#
+#
+#
+
+
+
+
 from math import *
 from sympy import *
 from InputReader import *
@@ -6,7 +18,7 @@ One = type(Abs(1)/Abs(1))
 class Initialization(object):
 	#creaters reader object from InputReader which reads input file
 	#for internal external and props given in sympy objects
-	_Reader = Reader("input.DAT")
+	_Reader = Reader("working.DAT")
 	#,_Reader = Reader("working.DAT")
 	inputs = _Reader.Input_filereader()
 	print("************************************************************************")
@@ -18,6 +30,11 @@ class Initialization(object):
 	def __init__(self):
 		super(Initialization, self).__init__()
 		#print(self.Propagators)
+
+
+	def get_props(self):
+		return self.Propagators
+
 	#find_squares is a method in the Initialization object which takes the inputed internal,external
 	#and propagators and then finds the values at which are power of 2 or higher energies.
 	#For example k**2 is a square or k*p is a square. Things that appear in terms such as
@@ -43,15 +60,15 @@ class Initialization(object):
 			#		print("hi")
 					continue
 				else:
-					print(temp[y],"   temp y")
-					print(self.Internal[i])
+					#print(temp[y],"   temp y")
+					#print(self.Internal[i])
 					new_temp = small_O_n(temp[y],1)
 			#		print(temp,"    TEMP")
 			#		print(new_temp,"      NEW TEMP")
 					if new_temp.coeffs()[0] != 0:
 						temp[y] = temp[y]/new_temp.coeffs()[0]
 			#		print(temp,"     temp after division")
-			print(temp, "       FInal temp")
+			#print(temp, "       FInal temp")
 			for z in range(len(temp)):
 				temp[z] = (temp[z] * self.Internal[i]).expand()
 				for x in range(len(temp[z].args)):
@@ -68,14 +85,14 @@ class Initialization(object):
 			del new_temp
 			del coef
 			Squares = list(set(Squares))
-			print(Squares, "      Squares")
+			#print(Squares, "      Squares")
 		return Squares
 	#This method will eventualy return the Matrix which contains the coefficients
 	# of the squares in the expanded propagators, the external squared momenta,
 	# and a row on bottom of just 0's if not col for external and 1 otherwise
 	def External_Matrix(self):
 		Squares = Matrix(self.find_squares())
-		print(Squares, "     Squares")
+		#print(Squares, "     Squares")
 		Singleton=[]
 		temp = [[0 for x in range(len(Squares))]for y in range(len(self.Propagators))]
 
@@ -111,7 +128,7 @@ class Initialization(object):
 						else:
 							temp[Singleton[x][1]][i] = 0
 
-		print(temp,"       Temp")
+		#print(temp,"       Temp")
 
 
 		TSquares = Matrix(temp)*Squares
@@ -133,7 +150,7 @@ class Initialization(object):
 			else:
 				bot_row[i] = 1
 		Final_Mat = Final_Mat.row_insert(7,Matrix([bot_row]))
-		print(Final_Mat,"            Final_Mat")
+		#print(Final_Mat,"            Final_Mat")
 
 		Final_Mat_Inv = Final_Mat**-1
 
@@ -151,8 +168,3 @@ def small_O_n(p,n):
 		if p.terms()[i][0][0] < n:
 			temp = temp - poly(p.coeffs()[i]*var**p.terms()[i][0][0],var)
 	return temp
-
-
-
-Initialize = Initialization()
-print(Initialize.External_Matrix())
