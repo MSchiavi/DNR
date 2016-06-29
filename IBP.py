@@ -24,7 +24,8 @@ class IBP(object):
 		Brew = Initialization()
 		print(Brew.External_Matrix())
 		Props = Brew.get_props()
-		self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
+		output = self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
+		self.IBP_String = self.output_reader(output)
 
 
 	def rep(self,Props,Squares,External_Matrix):
@@ -79,7 +80,9 @@ class IBP(object):
 		output.append([diff(self.x,self.y)*Symbol('d')])
 
 
-		print output
+		return output
+
+	def output_reader(self,output):
 
 		readable = ""
 
@@ -103,7 +106,13 @@ class IBP(object):
 
 
 		readable = readable + " + " + str(output[3][0])
-		print readable
-k = Symbol('k')
+		
+		return readable
+	def read_IBP(self):
+		return self.IBP_String
+
+
+x = Symbol('k')
 y = Symbol('k')
-IBP = IBP(k,y)
+IBP = IBP(x,y)
+print(IBP.read_IBP())
