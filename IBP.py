@@ -69,7 +69,7 @@ class IBP(object):
 		#Creating the IBP output. Ladders is an object which represents creation and annihilation operators. The first arguement is which propagator 
 		# it will effect and the second is if it is creation ('+') or annihilation ('-'). indicies is just the "a" term from the propagators. 
 		print temp
-
+		
 		for i in range(len(temp)):
 			for j in range(len(temp[i])):
 				if j < (len(temp[i])-1):
@@ -83,7 +83,9 @@ class IBP(object):
 		return output
 
 	def output_reader(self,output):
-
+		#Takes the output from rep function and turns it into a string which can be printed and read. 
+		# Still need to get rid of things like Y(1,-)Y(1,+) should ---> 1
+		
 		readable = ""
 
 		for i in range(len(output) - 1 ):
@@ -108,6 +110,7 @@ class IBP(object):
 		readable = readable + " + " + str(output[3][0])
 		
 		return readable
+
 	def read_IBP(self):
 		return self.IBP_String
 
