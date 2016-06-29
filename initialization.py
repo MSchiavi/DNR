@@ -132,7 +132,6 @@ class Initialization(object):
 
 
 		TSquares = Matrix(temp)*Squares
-		#print(TSquares,"         TSquares is temp after dot with squares")
 
 		External_Vec = Matrix(self.Propagators) - TSquares
 		for i in range(len(External_Vec)):
