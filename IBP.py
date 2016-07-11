@@ -48,6 +48,10 @@ class IBP(object):
 		for i in range(len(DProps)):
 
 			for j in range(len(Squares)):
+				if DProps[i] == 0:
+					coeffs[i][j] == 0 
+					continue
+
 				if type(DProps[i].args[0]) is Integer:
 				
 					if type(DProps[i].args[1]/Squares[j]) is One:
@@ -205,19 +209,6 @@ class IBP(object):
 		IBP_OPS.append(fin_output)
 		IBP_OPS.append(sym_bro)
 		return IBP_OPS
-#
-#		for i in range(len(output) - 1 ):
-#			for j in range(len(output[i])):
-#				if output[i][j][0] != 0:
-#					if output[i][j][0] == 1:
-#
-#
-#					elif type(output[i][j][0]) is Integer and output[i][j][0] > 1:
-#
-#					else:
-#						if output[i][j][0].args[0] == 1:
-#
-#						elif output[i][j][0].args[0] == -1:
 
 
 	def read_IBP(self):

@@ -18,7 +18,7 @@ One = type(Abs(1)/Abs(1))
 class Initialization(object):
 	#creaters reader object from InputReader which reads input file
 	#for internal external and props given in sympy objects
-	_Reader = Reader("working.DAT")
+	_Reader = Reader("input.DAT")
 	#,_Reader = Reader("working.DAT")
 	inputs = _Reader.Input_filereader()
 	print("************************************************************************")
