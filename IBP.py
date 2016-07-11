@@ -49,7 +49,7 @@ class IBP(object):
 
 			for j in range(len(Squares)):
 				if type(DProps[i].args[0]) is Integer:
-					print(DProps[i].args)
+				
 					if type(DProps[i].args[1]/Squares[j]) is One:
 						coeffs[i][j]=(DProps[i].args[0])
 					else:
@@ -68,11 +68,9 @@ class IBP(object):
 		for i in range(len(coeffs)):
 			temp[i] = transpose(Matrix(coeffs[i]))*External_Matrix
 		
-		#output = [[] for y in range(len(temp))]
 		output = []
 		#Creating the IBP output. Ladders is an object which represents creation and annihilation operators. The first arguement is which propagator 
 		# it will effect and the second is if it is creation ('+') or annihilation ('-'). indicies is just the "a" term from the propagators. 
-		#print temp
 		
 		for i in range(len(temp)):
 			for j in range(len(temp[i])):
@@ -130,7 +128,7 @@ class IBP(object):
 		sym_bro = []
 		IBP_OPS = []
 
-	#####Something is wrong here not grabbing the correct ladder objects ##########
+
 		for i in range(len(ini_output) - 1):
 			if ini_output[i][0] != 0 and len(ini_output[i]) != 1:
 				if ini_output[i][1] != 1:
@@ -139,14 +137,10 @@ class IBP(object):
 					op_count += 1
 				if ini_output[i][2] != 1:
 					
-					sym_bro.append(ini_output[i][1])
+					sym_bro.append(ini_output[i][2])
 					op_count += 1
 			elif ini_output[i][0] == 0:
 				zero_count += 1
-
-    ########################################
-		print(sym_bro)
-		print (op_count,"       op count")
 
 		sym = symbols("I:"+str(op_count))
 		x = 0
@@ -159,42 +153,51 @@ class IBP(object):
 					ini_output[i][2] = sym[x]
 					x += 1 
 
-		#print(sym_bro)
-		#for i in range(len(sym_bro)):
-		#	if sym_bro[i] != 1:
-		#		print(sym_bro[i].get_op())
 		
-
 		for i in range(len(ini_output) - 1):
 			if ini_output[i][0] != 0:
+				
+
 				if ini_output[i][1] != 1 or ini_output[i][2] != 1:
+
+
+
 					for j in range(len(sym)):
 						if sym[j] == ini_output[i][1]:
 							op_1 = j
 						if sym[j] == ini_output[i][2]:
 							op_2 = j
+						if sym[j] != ini_output[i][1] and ini_output[i][1] == 1:
+							op_1 = -1
+
+						if sym[j] != ini_output[i][2] and ini_output[i][2] == 1:
+							op_1 = -1
+
 					if sym_bro[op_1] == 1 or sym_bro[op_2] == 1:
 						continue
-					else:
-						if sym_bro[op_1].get_index() == sym_bro[op_2].get_index():
+					if op_1 == -1 or op_2 == -1:
+						continue
 
 
-							if sym_bro[op_1].get_op() != sym_bro[op_2].get_op():
+					if sym_bro[op_1].get_index() == sym_bro[op_2].get_index():
+
+						if sym_bro[op_1].get_op() != sym_bro[op_2].get_op():
+						
+							ini_output[i][1] = 1
+							ini_output[i][2] = 1
 							
-								ini_output[i][1] = 1
-								ini_output[i][2] = 1
-								
-								del op_1
-								del op_2 
-						else:
 							del op_1
 							del op_2 
+					else:
+						del op_1
+						del op_2 
 						
+
 
 		for i in range(len(ini_output)-1):
 			if ini_output[i][0] != 0:
 				fin_output = fin_output + ini_output[i][0]*ini_output[i][1]*ini_output[i][2]*ini_output[i][3]
-		fin_output = fin_output + ini_output[len(ini_output) - 1][0]
+		fin_output = fin_output - ini_output[len(ini_output) - 1][0]
 
 
 
@@ -227,6 +230,5 @@ class IBP(object):
 x = Symbol('k')
 y = Symbol('k')
 IBP = IBP(x,y)
-#print(IBP.get_output())
 print(IBP.get_math_output())
 print("Run time:",'%.3f'%(time.time()-start_time) )
