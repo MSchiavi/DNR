@@ -13,17 +13,28 @@
 from math import *
 from sympy import *
 from InputReader import *
+import sys
 
 One = type(Abs(1)/Abs(1))
 class Initialization(object):
+	#
+	#
+	#
 	#creaters reader object from InputReader which reads input file
 	#for internal external and props given in sympy objects
-	_Reader = Reader("input.DAT")
-	#,_Reader = Reader("working.DAT")
+	try:
+		inFile = sys.argv[1]
+		Input = open(inFile)
+		Contents = Input.read()
+		print(Contents)
+		Input.close()
+
+	except IndexError:
+		inFile = "input.DAT"
+
+	_Reader = Reader(inFile)
 	inputs = _Reader.Input_filereader()
-	print("************************************************************************")
-	print(inputs,"       Inputed parameters")
-	print("************************************************************************")
+
 	Internal = inputs[0]
 	Externla = inputs[1]
 	Propagators = inputs[2]
