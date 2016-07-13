@@ -1,5 +1,5 @@
 #    Author: Matthew Schiavi
-#	 Last Edit: 06-27-16
+#	 Last Edit: 07-12-16
 #
 #	Based off of the Internal, External, and propagators which are inputed in the input file this generates the matrix to produce
 #	IBPS
@@ -36,7 +36,7 @@ class Initialization(object):
 	inputs = _Reader.Input_filereader()
 
 	Internal = inputs[0]
-	Externla = inputs[1]
+	External = inputs[1]
 	Propagators = inputs[2]
 	def __init__(self):
 		super(Initialization, self).__init__()
@@ -45,6 +45,10 @@ class Initialization(object):
 
 	def get_props(self):
 		return self.Propagators
+	def get_internal(self):
+		return self.Internal
+	def get_external(self):
+		return self.External
 
 	#find_squares is a method in the Initialization object which takes the inputed internal,external
 	#and propagators and then finds the values at which are power of 2 or higher energies.
@@ -178,3 +182,6 @@ def small_O_n(p,n):
 		if p.terms()[i][0][0] < n:
 			temp = temp - poly(p.coeffs()[i]*var**p.terms()[i][0][0],var)
 	return temp
+
+def get_inFile(self):
+	return self.inFile

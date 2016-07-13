@@ -1,5 +1,5 @@
 #    Author: Matthew Schiavi
-#	 Last Edit: 06-27-16
+#	 Last Edit: 07-12-16
 #
 #	Generates IBP relationships based off of Internal, External, and Propagators which are defined in the input file.
 #
@@ -14,13 +14,13 @@ from initialization import *
 from representation import *
 import time
 
-start_time = time.time()
+#start_time = time.time()
 One = type(Abs(1)/Abs(1))
 
-class IBP(object):
+class IBP:
 
 	def __init__(self,x,y):
-		super(IBP, self).__init__()
+		#super(IBP, self).__init__()
 		self.x = x
 		self.y = y
 		#Creating object which contains Squares, inverse matrix for IBP creation, propagators,internal and external momenta.
@@ -218,8 +218,8 @@ class IBP(object):
 	def get_math_output(self):
 		return self.math_output
 
-x = Symbol('k')
-y = Symbol('k')
-IBP = IBP(x,y)
-print(IBP.get_math_output())
-print("Run time:",'%.3f'%(time.time()-start_time) )
+#x = Symbol('k')
+#y = Symbol('k')
+#IBP = IBP(x,y)
+#print(IBP.get_math_output())
+#print("Run time:",'%.3f'%(time.time()-start_time) )
