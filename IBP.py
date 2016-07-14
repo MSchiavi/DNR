@@ -202,7 +202,7 @@ class IBP:
 			if ini_output[i][0] != 0:
 				fin_output = fin_output + ini_output[i][0]*ini_output[i][1]*ini_output[i][2]*ini_output[i][3]
 		fin_output = fin_output - ini_output[len(ini_output) - 1][0]
-
+		fin_output = fin_output * -1
 
 
 		print("========================================================================================================")
