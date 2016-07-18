@@ -23,17 +23,11 @@ print(External)
 for i in range(len(External)):
 	for j in range(len(Internal)):
 		_IBP = IBP(External[i],Internal[j])
-		#print(External[i],Internal[j])
-		#print(_IBP.get_math_output())
+		print(External[i],Internal[j])
+		print(_IBP.get_math_output())
 
 		#print(_IBP.get_math_output()[1][2].get_index())
 		#print(_IBP.get_math_output()[1][2].get_op())
-
-		#print(_IBP.get_math_output()[1][3].get_index())
-		#print(_IBP.get_math_output()[1][3].get_op())
-
-		#print(_IBP.get_math_output()[1][4].get_index())
-		#print(_IBP.get_math_output()[1][4].get_op())
 
 		#print(_IBP.get_math_output()[1][3].get_index())
 		#print(_IBP.get_math_output()[1][3].get_op())
@@ -46,6 +40,12 @@ for i in range(len(External)):
 
 		#print(_IBP.get_math_output()[1][6].get_index())
 		#print(_IBP.get_math_output()[1][6].get_op())
+
+		#print(_IBP.get_math_output()[1][7].get_index())
+		#print(_IBP.get_math_output()[1][7].get_op())
+
+		#print(_IBP.get_math_output()[1][8].get_index())
+		#print(_IBP.get_math_output()[1][8].get_op())
 
 		#print(_IBP.get_math_output()[1][9].get_index())
 		#print(_IBP.get_math_output()[1][9].get_op())
@@ -60,8 +60,8 @@ for i in range(len(External)):
 for i in range(len(Internal)):
 	for j in range(len(Internal)):
 		_IBP = IBP(Internal[i],Internal[j])
-		print(Internal[i],Internal[j])
-		print(_IBP.get_math_output())
+		#print(Internal[i],Internal[j])
+		#print(_IBP.get_math_output())
 
 		#print(_IBP.get_math_output()[1][2].get_index())
 		#print(_IBP.get_math_output()[1][2].get_op())
@@ -96,8 +96,75 @@ for i in range(len(Internal)):
 		del _IBP
 
 
+#_IBP = IBP(Internal[1],Internal[0])
+#print(Internal[1],Internal[0])
+#print(_IBP.get_math_output())
 
+#print(_IBP.get_math_output()[1][0].get_index())
+#print(_IBP.get_math_output()[1][0].get_op())
 
+#print(_IBP.get_math_output()[1][1].get_index())
+#print(_IBP.get_math_output()[1][1].get_op())
+
+#print(_IBP.get_math_output()[1][2].get_index())
+#print(_IBP.get_math_output()[1][2].get_op())
+
+#print(_IBP.get_math_output()[1][3].get_index())
+#print(_IBP.get_math_output()[1][3].get_op())
+
+#print(_IBP.get_math_output()[1][4].get_index())
+#print(_IBP.get_math_output()[1][4].get_op())
+
+#print(_IBP.get_math_output()[1][5].get_index())
+#print(_IBP.get_math_output()[1][5].get_op())
+
+#print(_IBP.get_math_output()[1][6].get_index())
+#print(_IBP.get_math_output()[1][6].get_op())
+
+#print(_IBP.get_math_output()[1][7].get_index())
+#print(_IBP.get_math_output()[1][7].get_op())
+
+#print(_IBP.get_math_output()[1][8].get_index())
+#print(_IBP.get_math_output()[1][8].get_op())
+
+#print(_IBP.get_math_output()[1][9].get_index())
+#print(_IBP.get_math_output()[1][9].get_op())
+
+#print(_IBP.get_math_output()[1][10].get_index())
+#print(_IBP.get_math_output()[1][10].get_op())
+
+#print(_IBP.get_math_output()[1][11].get_index())
+#print(_IBP.get_math_output()[1][11].get_op())
+
+#print(_IBP.get_math_output()[1][12].get_index())
+#print(_IBP.get_math_output()[1][12].get_op())
+
+#print(_IBP.get_math_output()[1][13].get_index())
+#print(_IBP.get_math_output()[1][13].get_op())
+
+#print(_IBP.get_math_output()[1][16].get_index())
+#print(_IBP.get_math_output()[1][16].get_op())
+
+#print(_IBP.get_math_output()[1][17].get_index())
+#print(_IBP.get_math_output()[1][17].get_op())
+
+#print(_IBP.get_math_output()[1][18].get_index())
+#print(_IBP.get_math_output()[1][18].get_op())
+
+#print(_IBP.get_math_output()[1][19].get_index())
+#print(_IBP.get_math_output()[1][19].get_op())
+
+#print(_IBP.get_math_output()[1][20].get_index())
+#print(_IBP.get_math_output()[1][20].get_op())
+
+#print(_IBP.get_math_output()[1][21].get_index())
+#print(_IBP.get_math_output()[1][21].get_op())
+
+#print(_IBP.get_math_output()[1][24].get_index())
+#print(_IBP.get_math_output()[1][24].get_op())
+
+#print(_IBP.get_math_output()[1][25].get_index())
+#print(_IBP.get_math_output()[1][25].get_op())
 
 
 

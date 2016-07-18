@@ -50,22 +50,23 @@ class IBP:
 		for i in range(len(DProps)):
 
 			for j in range(len(Squares)):
+				temp_arg = None
 				if DProps[i] == 0:
 					coeffs[i][j] == 0 
 					continue
 
 				if type(DProps[i].args[0]) is Integer:
 
-					print(DProps[i].args)
+					#print(DProps[i].args)
 					if len(DProps[i].args) > 2:
 						temp_arg = DProps[i].args[0]
 						for a in range(len(DProps[i].args)):
 							temp_arg = temp_arg*DProps[i].args[a]
 						temp_arg = temp_arg/DProps[i].args[0]
-						print(temp_arg,"    temp_arg")
-						print(type(DProps[i].args))
+						#print(temp_arg,"    temp_arg")
+						#print(type(DProps[i].args))
 
-					if temp_arg != None:
+					if temp_arg is not None:
 						if type(temp_arg/Squares[j]) is Integer:
 							coeffs[i][j] = temp_arg/Squares[j]
 						else:
@@ -87,14 +88,14 @@ class IBP:
 							#print(Squares[j])
 							#print(DProps[i].args[k]/Squares[j])
 
-		print(coeffs,"        coeffs")
+		#print(coeffs,"        coeffs")
 		#print(Squares,"       Squares")
 
 		# Some cleaning up storing thigns in the coeffs list
 		for i in range(len(DProps)):
-			print(DProps[i],"     dprops")
-			print(transpose(Matrix(coeffs[i])).dot(Matrix(Squares)),"      dot stuff")
-			print(DProps[i] - transpose(Matrix(coeffs[i])).dot(Matrix(Squares)),"     difference")
+			#print(DProps[i],"     dprops")
+			#print(transpose(Matrix(coeffs[i])).dot(Matrix(Squares)),"      dot stuff")
+			#print(DProps[i] - transpose(Matrix(coeffs[i])).dot(Matrix(Squares)),"     difference")
 			coeffs[i].append(DProps[i] - transpose(Matrix(coeffs[i])).dot(Matrix(Squares)))
 
 
@@ -250,7 +251,7 @@ class IBP:
 	def get_math_output(self):
 		return self.math_output
 
-x = Symbol('l')
-y = Symbol('k')
-IBP = IBP(x,y)
-print(IBP.get_math_output())
+#x = Symbol('l')
+#y = Symbol('k')
+#IBP = IBP(x,y)
+#print(IBP.get_math_output())
