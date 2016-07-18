@@ -44,7 +44,9 @@ class IBP:
 
 		#Gets the coefficient of the DProp terms with respect to the Squares. For instance if DProps is [2*k**2 - 2*k*p, 2*k**2 + 2*k*q, 2*k**2] 
 		#and squares is [k*p, k**2, k*q] coeffs will be [[-2,2,0],[0,2,2],[0,2,0]]
-
+		#print(DProps,"      DProps")
+		#print(Squares,"     Squares")
+		
 		for i in range(len(DProps)):
 
 			for j in range(len(Squares)):
@@ -53,8 +55,26 @@ class IBP:
 					continue
 
 				if type(DProps[i].args[0]) is Integer:
-				
+
+					print(DProps[i].args)
+					if len(DProps[i].args) > 2:
+						temp_arg = DProps[i].args[0]
+						for a in range(len(DProps[i].args)):
+							temp_arg = temp_arg*DProps[i].args[a]
+						temp_arg = temp_arg/DProps[i].args[0]
+						print(temp_arg,"    temp_arg")
+						print(type(DProps[i].args))
+
+					if temp_arg != None:
+						if type(temp_arg/Squares[j]) is Integer:
+							coeffs[i][j] = temp_arg/Squares[j]
+						else:
+							coeffs[i][j] = 0
+						del temp_arg
+						continue
+
 					if type(DProps[i].args[1]/Squares[j]) is One:
+
 						coeffs[i][j]=(DProps[i].args[0])
 					else:
 						coeffs[i][j] = 0
@@ -63,12 +83,23 @@ class IBP:
 					for k in range(len(DProps[i].args)):
 						if type(DProps[i].args[k]/Squares[j]) is Integer:
 							coeffs[i][j] = (DProps[i].args[k]/Squares[j])
+							#print(DProps[i].args[k])
+							#print(Squares[j])
+							#print(DProps[i].args[k]/Squares[j])
+
+		print(coeffs,"        coeffs")
+		#print(Squares,"       Squares")
 
 		# Some cleaning up storing thigns in the coeffs list
 		for i in range(len(DProps)):
+			print(DProps[i],"     dprops")
+			print(transpose(Matrix(coeffs[i])).dot(Matrix(Squares)),"      dot stuff")
+			print(DProps[i] - transpose(Matrix(coeffs[i])).dot(Matrix(Squares)),"     difference")
 			coeffs[i].append(DProps[i] - transpose(Matrix(coeffs[i])).dot(Matrix(Squares)))
-		
-		# More math stuff storing thing sin temp list
+
+
+		#print(coeffs,"         coeffs")
+		# More math stuff storing things in temp list
 		for i in range(len(coeffs)):
 			temp[i] = transpose(Matrix(coeffs[i]))*External_Matrix
 		
@@ -132,6 +163,7 @@ class IBP:
 		sym_bro = []
 		IBP_OPS = []
 
+		#print(ini_output,"        ini_output")
 
 		for i in range(len(ini_output) - 1):
 			if ini_output[i][0] != 0 and len(ini_output[i]) != 1:
@@ -218,8 +250,7 @@ class IBP:
 	def get_math_output(self):
 		return self.math_output
 
-#x = Symbol('k')
-#y = Symbol('k')
-#IBP = IBP(x,y)
-#print(IBP.get_math_output())
-#print("Run time:",'%.3f'%(time.time()-start_time) )
+x = Symbol('l')
+y = Symbol('k')
+IBP = IBP(x,y)
+print(IBP.get_math_output())

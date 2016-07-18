@@ -23,17 +23,17 @@ print(External)
 for i in range(len(External)):
 	for j in range(len(Internal)):
 		_IBP = IBP(External[i],Internal[j])
-		print(External[i],Internal[j])
-		print(_IBP.get_math_output())
+		#print(External[i],Internal[j])
+		#print(_IBP.get_math_output())
 
-		print(_IBP.get_math_output()[1][2].get_index())
-		print(_IBP.get_math_output()[1][2].get_op())
+		#print(_IBP.get_math_output()[1][2].get_index())
+		#print(_IBP.get_math_output()[1][2].get_op())
 
-		print(_IBP.get_math_output()[1][3].get_index())
-		print(_IBP.get_math_output()[1][3].get_op())
+		#print(_IBP.get_math_output()[1][3].get_index())
+		#print(_IBP.get_math_output()[1][3].get_op())
 
-		print(_IBP.get_math_output()[1][4].get_index())
-		print(_IBP.get_math_output()[1][4].get_op())
+		#print(_IBP.get_math_output()[1][4].get_index())
+		#print(_IBP.get_math_output()[1][4].get_op())
 
 		#print(_IBP.get_math_output()[1][3].get_index())
 		#print(_IBP.get_math_output()[1][3].get_op())
@@ -63,23 +63,23 @@ for i in range(len(Internal)):
 		print(Internal[i],Internal[j])
 		print(_IBP.get_math_output())
 
-		print(_IBP.get_math_output()[1][2].get_index())
-		print(_IBP.get_math_output()[1][2].get_op())
+		#print(_IBP.get_math_output()[1][2].get_index())
+		#print(_IBP.get_math_output()[1][2].get_op())
 
-		print(_IBP.get_math_output()[1][3].get_index())
-		print(_IBP.get_math_output()[1][3].get_op())
+		#print(_IBP.get_math_output()[1][3].get_index())
+		#print(_IBP.get_math_output()[1][3].get_op())
 
-		print(_IBP.get_math_output()[1][4].get_index())
-		print(_IBP.get_math_output()[1][4].get_op())
+		#print(_IBP.get_math_output()[1][4].get_index())
+		#print(_IBP.get_math_output()[1][4].get_op())
 
-		print(_IBP.get_math_output()[1][7].get_index())
-		print(_IBP.get_math_output()[1][7].get_op())
+		#print(_IBP.get_math_output()[1][7].get_index())
+		#print(_IBP.get_math_output()[1][7].get_op())
 
-		print(_IBP.get_math_output()[1][8].get_index())
-		print(_IBP.get_math_output()[1][8].get_op())
+		#print(_IBP.get_math_output()[1][8].get_index())
+		#print(_IBP.get_math_output()[1][8].get_op())
 
-		print(_IBP.get_math_output()[1][9].get_index())
-		print(_IBP.get_math_output()[1][9].get_op())
+		#print(_IBP.get_math_output()[1][9].get_index())
+		#print(_IBP.get_math_output()[1][9].get_op())
 
 		#print(_IBP.get_math_output()[1][12].get_index())
 		#print(_IBP.get_math_output()[1][12].get_op())
