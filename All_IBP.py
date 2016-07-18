@@ -60,8 +60,8 @@ for i in range(len(External)):
 for i in range(len(Internal)):
 	for j in range(len(Internal)):
 		_IBP = IBP(Internal[i],Internal[j])
-		#print(Internal[i],Internal[j])
-		#print(_IBP.get_math_output())
+		print(Internal[i],Internal[j])
+		print(_IBP.get_math_output())
 
 		#print(_IBP.get_math_output()[1][2].get_index())
 		#print(_IBP.get_math_output()[1][2].get_op())

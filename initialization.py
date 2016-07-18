@@ -40,7 +40,7 @@ class Initialization(object):
 	Propagators = inputs[2]
 	def __init__(self):
 		super(Initialization, self).__init__()
-		#print(self.Propagators)
+		#print(self.Propagators,"            Props")
 
 
 	def get_props(self):

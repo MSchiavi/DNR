@@ -1,4 +1,5 @@
 from sympy import Symbol
+from sympy.parsing.sympy_parser import parse_expr
 
 
 class Reader:
@@ -59,13 +60,15 @@ class Reader:
         input_Symbols = cleanup(input_Symbols)
         Internal = cleanup(Internal)
         External = cleanup(External)
-        Props = Props.replace("[","")
-        Props = Props.replace("]","")
+        #Props = Props.replace("[","")
+        #Props = Props.replace("]","")
         
         Symbols = math_list(input_Symbols)
         Internal = math_list(Internal)
         External = math_list(External)
-        Propagators = props_list(Props)
+
+        Propagators = props_list_2(Props)
+        print(Propagators)
         inputs.append(Internal)
         inputs.append(External)
         inputs.append(Propagators)
@@ -86,65 +89,24 @@ def math_list(String):
         result.append(Symbol(String[i]))
     return result    
 #Lists out the propagators and will eventually put then in  mathematical format. 
-
-def props_list(String):
-    j = 0
+def props_list_2(String):
     Propagators = []
+    String = String.replace("[","")
+   # String = String.replace("]","")
+    String = String.replace(" ","")
+    temp = ""
+
     for i in range(len(String)):
-        if j == 2:
-            temp = ""
-            for k in range(start,i+1):
-                temp = temp + String[k]
+        if String[i] == "]":
             Propagators.append(temp)
-            j = 0 
-        
-        if String[i] == '(':
-            start = i 
-        
-        if String[i] == '*':
-            j+=1
-
-    #Trying to get the propagators out of a string and in a mathematical format
-    #so they can be manipulated. 
+        if String[i] != ",":
+            temp = temp + String[i]
+        else:
+            Propagators.append(temp)
+            temp = ""
     for i in range(len(Propagators)):
-        times = 0
-        number_times = 0
-        minus = 0
-        plus = 0
-        Open_P = Propagators[i].count('(')
-        Close_P = Propagators[i].count(')')
-        minus_count = Propagators[i].count('-')
-        plus_count = Propagators[i].count('+')
-        Propagators[i] = Propagators[i].replace("(","")
-        Propagators[i] = Propagators[i].replace(")","")
-        for j in range(len(Propagators[i])):
-            if Propagators[i][j] == '-':
-                minus = j
-            elif Propagators[i][j] == '+':
-                plus = j
-            elif Propagators[i][j] == '*':
-                number_times += 1 
-                times = j
-        power = int(Propagators[i][times + 1])
-        Propagators[i] = Propagators[i].replace(Propagators[i][times + 1],"")
-        Propagators[i] = Propagators[i].replace("-","")
-        Propagators[i] = Propagators[i].replace("+","")
-        Propagators[i] = Propagators[i].replace("*","")
-        #print(Propagators)
-
-
-        #print(minus)
-        #print(times)
-        if len(Propagators[i])==1:
-            Propagators[i] = Symbol(Propagators[i])**power
-        elif len(Propagators[i]) > 1 and len(Propagators[i]) <= 2 :
-            if minus != 0 and minus_count == 1:
-                Propagators[i] =(Symbol(Propagators[i][0]) - Symbol(Propagators[i][1]))**power 
-            if plus != 0 and plus_count == 1:
-                Propagators[i] =(Symbol(Propagators[i][0]) + Symbol(Propagators[i][1]))**power       
-
-
-    return Propagators    
+        Propagators[i] = parse_expr(Propagators[i])
+    return Propagators
             
 #Reader=Reader("input.DAT")
 
