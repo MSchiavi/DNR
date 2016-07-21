@@ -68,7 +68,7 @@ class Reader:
         External = math_list(External)
 
         Propagators = props_list_2(Props)
-        print(Propagators)
+        #print(Propagators)
         inputs.append(Internal)
         inputs.append(External)
         inputs.append(Propagators)

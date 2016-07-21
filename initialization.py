@@ -16,6 +16,7 @@ from InputReader import *
 import sys
 
 One = type(Abs(1)/Abs(1))
+NegativeOne = type(-1*(Abs(1)/Abs(1)))
 class Initialization(object):
 	#
 	#
@@ -72,7 +73,6 @@ class Initialization(object):
 			for y in range(len(temp)):
 			#	print(temp[y].args[0])
 				if temp[y].args[0] == 0:
-			#		print("hi")
 					continue
 				else:
 					#print(temp[y],"   temp y")
@@ -115,31 +115,40 @@ class Initialization(object):
 
 		for i in range(len(self.Propagators)):
 
-			#print(self.Propagators[i].expand().args,"      Propagators")
-
+			#print(self.Propagators[i].expand().args,"             Propagators")
+			#print(type(self.Propagators[i].expand().args[0]))
 			#This looks for any singleton props like k**2 and loops over the different args of the props to indentify which is a good square or not
 			# external momenta squares are bad squares. 
 			for j in range(len(self.Propagators[i].expand().args)):
 				for y in range(len(self.Internal)):
-					if self.Propagators[i].expand().args[j] == self.Internal[y] or type(self.Propagators[i].expand().args[j]) == Integer:
+					if self.Propagators[i].expand().args[j] == self.Internal[y] or type(self.Propagators[i].expand().args[j]) == Integer or type(self.Propagators[i].expand().args[j]) == NegativeOne:
 						Singleton.append([True,i])
+						#print("true")
 					else:
 						Singleton.append([False,i])
 				#This loop fills the matrix rows are the propagators in order of the input file and col is squares in order of the Squares list
 				for k in range(len(Squares)):
 
-					#print(self.Propagators[i].expand().args[j],Squares[k],i,k,self.Propagators[i].expand().args[j]/Squares[k])
+					#print(self.Propagators[i].expand().args[j],Squares[k],i,k,self.Propagators[i].expand().args[j]/Squares[k],type(self.Propagators[i].expand().args[j]/Squares[k]))
 
-					if type(self.Propagators[i].expand().args[j]/Squares[k]) is One or type(self.Propagators[i].expand().args[j]/Squares[k]) is Integer:
-						#print("added",self.Propagators[i].expand().args[j]/Squares[k])
-						temp[i][k] = (self.Propagators[i].expand().args[j]/Squares[k])
+
+				
+						
+
+					if type(self.Propagators[i].expand().args[j]/Squares[k]) is One or type(self.Propagators[i].expand().args[j]/Squares[k]) is Integer or type(self.Propagators[i].expand().args[j]/Squares[k]) is NegativeOne:
+							#print(i,k)
+							temp[i][k] = (self.Propagators[i].expand().args[j]/Squares[k]) 
+							#print("added",self.Propagators[i].expand().args[j]/Squares[k])
 		
 
 			for x in range(len(Singleton)):
 				if Singleton[x][0] == True:
 					for i in range(len(Squares)):
 						if Squares[i] == self.Propagators[Singleton[x][1]]:
+							#print("hi")
 							temp[Singleton[x][1]][i] = 1
+						elif -1*Squares[i] == self.Propagators[Singleton[x][1]]:
+							temp[Singleton[x][1]][i] = -1
 						else:
 							temp[Singleton[x][1]][i] = 0
 
@@ -147,7 +156,8 @@ class Initialization(object):
 
 
 		TSquares = Matrix(temp)*Squares
-
+		#print(TSquares,"        TSquares")
+		#print(Matrix(self.Propagators),"      Props")
 		External_Vec = Matrix(self.Propagators) - TSquares
 		for i in range(len(External_Vec)):
 			External_Vec[i] = External_Vec[i].expand()
@@ -157,18 +167,19 @@ class Initialization(object):
 		Final_Mat = Matrix(temp).col_insert(Matrix(temp).shape[1],External_Vec)
 		#print(Final_Mat,"           Final_Mat")
 		bot_row = [0 for x in range(len(temp)+1)]
-		#print(bot_row)
+		#print(bot_row,"             bot_row")
 		for i in range(Matrix(temp).shape[1] + 1):
 			if i < Matrix(temp).shape[0]:
 				bot_row[i] = 0
 			else:
 				bot_row[i] = 1
-		Final_Mat = Final_Mat.row_insert(7,Matrix([bot_row]))
-		#print(Final_Mat,"            Final_Mat")
+		Final_Mat = Final_Mat.row_insert(Final_Mat.shape[0],Matrix([bot_row]))
+
+		print(Final_Mat,"            Final_Mat")
 
 		Final_Mat_Inv = Final_Mat**-1
 
-		#print(Final_Mat_Inv,"Final_Mat_Inv ")
+		print(Final_Mat_Inv,"Final_Mat_Inv ")
 
 		return Final_Mat_Inv
 

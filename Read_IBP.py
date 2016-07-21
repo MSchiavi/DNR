@@ -70,8 +70,8 @@ def Read_IBP(IBP):
 Internal = _start.get_internal()
 External = _start.get_external()
 
-print(Internal)
-print(External)
+#print(Internal)
+#print(External)
 
 for i in range(len(External)):
 	for j in range(len(Internal)):

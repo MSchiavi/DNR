@@ -25,7 +25,7 @@ class IBP:
 		self.y = y
 		#Creating object which contains Squares, inverse matrix for IBP creation, propagators,internal and external momenta.
 		Brew = Initialization()
-		print(Brew.External_Matrix())
+		#print(Brew.External_Matrix())
 		Props = Brew.get_props()
 		self.output = self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
 		#self.IBP_String = self.output_reader(self.output)
@@ -87,10 +87,8 @@ class IBP:
 							#print(DProps[i].args[k])
 							#print(Squares[j])
 							#print(DProps[i].args[k]/Squares[j])
-
 		#print(coeffs,"        coeffs")
-		#print(Squares,"       Squares")
-
+		
 		# Some cleaning up storing thigns in the coeffs list
 		for i in range(len(DProps)):
 			#print(DProps[i],"     dprops")
@@ -103,7 +101,9 @@ class IBP:
 		# More math stuff storing things in temp list
 		for i in range(len(coeffs)):
 			temp[i] = transpose(Matrix(coeffs[i]))*External_Matrix
-		
+			#print(External_Matrix)
+			#print(coeffs[i],"      coeffs")
+			#print(temp[i],"        temp")
 		output = []
 		#Creating the IBP output. Ladders is an object which represents creation and annihilation operators. The first arguement is which propagator 
 		# it will effect and the second is if it is creation ('+') or annihilation ('-'). indicies is just the "a" term from the propagators. 
@@ -251,7 +251,7 @@ class IBP:
 	def get_math_output(self):
 		return self.math_output
 
-#x = Symbol('l')
+#x = Symbol('p')
 #y = Symbol('k')
 #IBP = IBP(x,y)
 #print(IBP.get_math_output())
