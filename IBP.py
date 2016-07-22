@@ -24,13 +24,16 @@ class IBP:
 		self.x = x
 		self.y = y
 		#Creating object which contains Squares, inverse matrix for IBP creation, propagators,internal and external momenta.
+		Brew_time = time.time()
 		Brew = Initialization()
 		#print(Brew.External_Matrix())
 		Props = Brew.get_props()
+		Ext_Mat_time = time.time()
 		self.output = self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
+		print("Ext_Mat_time:",'%.3f'%(time.time()-Ext_Mat_time) )
 		#self.IBP_String = self.output_reader(self.output)
 		self.math_output = self.math_output(self.output)
-
+		print("Brew_time:",'%.3f'%(time.time()-Brew_time) )
 
 	def rep(self,Props,Squares,External_Matrix):
 		DProps = []

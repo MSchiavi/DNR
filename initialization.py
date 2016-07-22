@@ -18,9 +18,9 @@ import sys
 One = type(Abs(1)/Abs(1))
 NegativeOne = type(-1*(Abs(1)/Abs(1)))
 class Initialization(object):
-	#
-	#
-	#
+	
+	
+	
 	#creaters reader object from InputReader which reads input file
 	#for internal external and props given in sympy objects
 	try:
@@ -175,11 +175,11 @@ class Initialization(object):
 				bot_row[i] = 1
 		Final_Mat = Final_Mat.row_insert(Final_Mat.shape[0],Matrix([bot_row]))
 
-		print(Final_Mat,"            Final_Mat")
+		#print(Final_Mat,"            Final_Mat")
 
 		Final_Mat_Inv = Final_Mat**-1
 
-		print(Final_Mat_Inv,"Final_Mat_Inv ")
+		#print(Final_Mat_Inv,"Final_Mat_Inv ")
 
 		return Final_Mat_Inv
 
