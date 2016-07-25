@@ -19,21 +19,29 @@ One = type(Abs(1)/Abs(1))
 
 class IBP:
 
-	def __init__(self,x,y):
+	def __init__(self):
 		#super(IBP, self).__init__()
+		#Creating object which contains Squares, inverse matrix for IBP creation, propagators,internal and external momenta.
+		#Brew_time = time.time()
+		self.Brew = Initialization()
+		#print(Brew.External_Matrix())
+		self.Props = self.Brew.get_props()
+		#Ext_Mat_time = time.time()
+		self.Ext_Mat = self.Brew.External_Matrix()
+		#self.output = self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
+		#print("Ext_Mat_time:",'%.3f'%(time.time()-Ext_Mat_time) )
+		#self.IBP_String = self.output_reader(self.output)
+		#self.math_output = self.math_output(self.output)
+		#print("Brew_time:",'%.3f'%(time.time()-Brew_time) )
+
+	
+	def Get_IBP(self,x,y):
 		self.x = x
 		self.y = y
-		#Creating object which contains Squares, inverse matrix for IBP creation, propagators,internal and external momenta.
-		Brew_time = time.time()
-		Brew = Initialization()
-		#print(Brew.External_Matrix())
-		Props = Brew.get_props()
-		Ext_Mat_time = time.time()
-		self.output = self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
-		print("Ext_Mat_time:",'%.3f'%(time.time()-Ext_Mat_time) )
-		#self.IBP_String = self.output_reader(self.output)
-		self.math_output = self.math_output(self.output)
-		print("Brew_time:",'%.3f'%(time.time()-Brew_time) )
+		self.output = self.rep(self.Props,self.Brew.find_squares(),self.Ext_Mat)
+		math = self.math_output(self.output)
+		return math
+
 
 	def rep(self,Props,Squares,External_Matrix):
 		DProps = []
