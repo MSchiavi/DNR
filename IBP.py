@@ -39,7 +39,9 @@ class IBP:
 		self.x = x
 		self.y = y
 		self.output = self.rep(self.Props,self.Brew.find_squares(),self.Ext_Mat)
-		print(self.output)
+		print(self.Props)
+		print(self.Brew.find_squares())
+		print(self.Ext_Mat)
 		math = self.math_output(self.output)
 		return math
 
