@@ -179,7 +179,7 @@ class Initialization(object):
 
 		Final_Mat_Inv = Final_Mat**-1
 
-		#print(Final_Mat_Inv,"Final_Mat_Inv ")
+		print(Final_Mat_Inv,"Final_Mat_Inv ")
 
 		return Final_Mat_Inv
 

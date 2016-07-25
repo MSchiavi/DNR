@@ -39,8 +39,9 @@ class IBP:
 		self.x = x
 		self.y = y
 		self.output = self.rep(self.Props,self.Brew.find_squares(),self.Ext_Mat)
-		math_output = self.math_output(self.output)
-		return math_output
+		print(self.output)
+		math = self.math_output(self.output)
+		return math
 
 
 	def rep(self,Props,Squares,External_Matrix):
