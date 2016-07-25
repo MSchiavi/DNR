@@ -30,6 +30,7 @@ class IBP:
 		Props = Brew.get_props()
 		Ext_Mat_time = time.time()
 		self.output = self.rep(Props,Brew.find_squares(),Brew.External_Matrix())
+		print(self.output)
 		print("Ext_Mat_time:",'%.3f'%(time.time()-Ext_Mat_time) )
 		#self.IBP_String = self.output_reader(self.output)
 		self.math_output = self.math_output(self.output)
