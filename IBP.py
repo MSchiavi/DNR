@@ -38,8 +38,15 @@ class IBP:
 	def Get_IBP(self,x,y):
 		self.x = x
 		self.y = y
+
+		rep_time = time.time()
 		self.output = self.rep(self.Props,self.Brew.find_squares(),self.Ext_Mat)
+		print("rep_time:",'%.3f'%(time.time()-rep_time) )
+
+		math_time = time.time()
 		math = self.math_output(self.output)
+		print("math_time:",'%.3f'%(time.time()-math_time) )
+		
 		return math
 
 
@@ -132,39 +139,6 @@ class IBP:
 
 
 		return output
-
-	def output_reader(self,output):
-		#Takes the output from rep function and turns it into a string which can be printed and read. 
-		# Still need to get rid of things like Y(1,-)Y(1,+) should ---> 1
-		
-		readable = ""
-
-		for i in range(len(output) - 1 ):
-
-			for j in range(len(output[i])):
-				if output[i][j][0] != 0:
-					if output[i][j][0] == 1:
-						
-						readable = readable + "" + " - a("+ str(output[i][j][3].get_index())+")" + "Y("+str(output[i][j][1].get_index())+ "," + output[i][j][1].get_op()+ ")" + "Y("+ str(output[i][j][2].get_index())+ "," + output[i][j][2].get_op()+ ")"
-
-					elif type(output[i][j][0]) is Integer and output[i][j][0] > 1:
-
-						readable = readable + "" + " - " + str(output[i][j][0])  + "a("+ str(output[i][j][3].get_index())+")" + "Y("+str(output[i][j][1].get_index())+ "," + output[i][j][1].get_op()+ ")" + "Y("+ str(output[i][j][2].get_index())+ "," + output[i][j][2].get_op()+ ")" 
-						
-					else:
-						if output[i][j][0].args[0] == 1:
-
-							readable = readable + "" + " - a("+ str(output[i][j][3].get_index())+ ")" + str(output[i][j][0]) + "Y("+ str(output[i][j][2].get_index())+ "," + output[i][j][2].get_op()+ ")" 
-
-						elif output[i][j][0].args[0] == -1:
-
-							readable = readable + "" + " + a("+ str(output[i][j][3].get_index())+ ")" + str(-1*output[i][j][0]) + "Y("+ str(output[i][j][2].get_index())+ "," + output[i][j][2].get_op()+ ")" 
-
-
-		readable = readable + " + " + str(output[3][0])
-		
-		return readable
-	
 
 
 

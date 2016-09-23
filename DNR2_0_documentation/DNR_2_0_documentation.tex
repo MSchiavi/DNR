@@ -1,0 +1,144 @@
+\documentclass[preprintnumbers,superscriptaddress,nofootinbib,aps,prd,floatfix]{revtex4}
+
+\addtolength{\topmargin}{0.4in}
+
+
+\usepackage{hyperref}
+\usepackage{amsmath,slashed}
+\usepackage{graphicx}
+\usepackage{axodraw}
+
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%\hyphenation{pro-pa-ga-tors}
+%\hyphenation{func-tions}pseudo-scalar
+\newcommand{\tb}{\textbf}
+\newcommand{\rig}{\rightarrow}
+\newcommand{\lrig}{\longrightarrow}
+\renewcommand{\d}{{\mathrm{d}}}
+\newcommand{\be}{\begin{eqnarray*}}
+\newcommand{\ee}{\end{eqnarray*}}
+\newcommand{\gl}[1]{(\ref{#1})}
+\newcommand{\ta}[2]{ \frac{ {\mathrm{d}} #1 } {{\mathrm{d}} #2}}
+\newcommand{\bee}{\begin{eqnarray}}
+\newcommand{\eee}{\end{eqnarray}}
+\newcommand{\beeq}{\begin{equation}}
+\newcommand{\eeeq}{\end{equation}}
+\newcommand{\gev}{{\rm{GeV}}}
+\newcommand{\GeV}{~GeV}
+\newcommand{\MET}{$\slashed{E}_T$~}
+\newcommand{\Tev}{{\rm{TeV}}}
+\newcommand{\fb}{{\rm{fb}}}
+\newcommand{\ifb}{{\rm{fb}}^{-1}}
+\newcommand{\pb}{{\rm{pb}}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\mr}{\mathrm}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\pt}{$p_{\rm{T}}$}
+\newcommand{\dnr}{DefinitelyNotReduze }
+\def\spa#1.#2{\left\langle#1#2\right\rangle}
+\def\spb#1.#2{\left[#1#2\right]}
+\def\lor#1.#2{\left(#1#2\right)}
+\def\sand#1.#2.#3{%
+\left\langle\smash{#1}{\vphantom1}^{-}\right|{#2}%
+\left|\smash{#3}{\vphantom1}^{-}\right\rangle}
+\def\sandp#1.#2.#3{%
+\left\langle\smash{#1}{\vphantom1}^{-}\right|{#2}%
+\left|\smash{#3}{\vphantom1}^{+}\right\rangle}
+\def\sandpp#1.#2.#3{%
+\left\langle\smash{#1}{\vphantom1}^{+}\right|{#2}%
+\left|\smash{#3}{\vphantom1}^{+}\right\rangle}
+\def\sandpm#1.#2.#3{%
+\left\langle\smash{#1}{\vphantom1}^{+}\right|{#2}%
+\left|\smash{#3}{\vphantom1}^{-}\right\rangle}
+\def\sandmp#1.#2.#3{%
+\left\langle\smash{#1}{\vphantom1}^{-}\right|{#2}%
+\left|\smash{#3}{\vphantom1}^{+}\right\rangle}
+\def\spab#1.#2.#3{\langle#1|#2|#3]}
+\def\spba#1.#2.#3{[#1|#2|#3\rangle}
+\def\spaa#1.#2.#3{\langle#1|#2|#3\rangle}
+\def\spbb#1.#2.#3{[#1|#2|#3]}
+\def\spaxa#1.#2.#3.#4{\langle#1|#2|#3|#4\rangle}
+\def\spbxb#1.#2.#3.#4{[#1|#2|#3|#4]}
+
+%\renewcommand{\vec}{\bf}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+
+\newcommand{\cp}{${\cal{CP}}$}
+\newcommand{\cpeven}{${\cal{CP}}$-even }
+\newcommand{\cpodd}{${\cal{CP}}$-odd }
+\newcommand{\emt}{$\times 10^{-3}$}
+\newcommand{\emfo}{$\times 10^{-4}$}
+\newcommand{\emfi}{$\times 10^{-5}$}
+
+
+\usepackage{color}
+\newcommand{\MSP}[1]{{\color{red}{MSP:~#1}}}
+\newcommand{\VVK}[1]{{\color{blue}{VVK:~#1}}}
+
+\begin{document} 
+
+\title{\dnr 2.0}
+
+\begin{abstract}
+\noindent 
+\dnr is a program which reduces loop integrals using the Integration by parts method (IBP). 
+
+\end{abstract}
+
+\author{Matthew Schiavi }
+\email[Email: ]{mmschiav@buffalo.edu}
+
+\affiliation{Department of Physics, University at Buffalo \\
+The State University of New York, 
+Buffalo, NY 14260-1500, USA\\
+}
+\smallskip
+%{\email {\tt srrappoc@buffalo.edu, broozbah@buffalo.edu, mmschiav@buffalo.edu, ciaranwi@buffalo.edu}}
+
+
+\pacs{}
+
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Algorithm}
+\subsection{IBP Generation}
+An important part of using the Laporta algorithm is generating IBPs and it is important that this is fully automated. Luckily it is a fairly simple process given the propagators, external momenta, and internal momenta are given. 
+
+\begin{center}
+\begin{enumerate}
+\item First we can organize the coefficients of the expanded propagators and place them in a matrix. The rows will correspond to propagators and the columns correspond to the specific term. For example, if the propagator expands out to $k^2 + p_1^2 - 2kp_1$ the corresponding row for this propagator would be (1, -2, 0) if we define the columns to contain terms $k^2, kp_1, kp_2$ respectively. At the moment it is important that we only care about terms which contain factors of the internal momenta in them. 
+\item At this point we take the matrix which was found in 1 and dot it with a vector of the squares. The order of this vector is important and is in the same order as the columns for the previous matrix are organized. 
+\item Now subtracting the vector we had just found with the propagators (again these are in a vector and the order is kept with the order which was in the original matrix) and what is left should be anything that does not include any factors of internal momenta.
+\item Take the matrix from step 1 and append the vector to the end to add an additional column. Also append a row at the bottom full of 0's except for the last column where there should be a 1. Now the inverse of that matrix is the last thing that needs to be done. It is important to note at this point this matrix can be used to generate any IBP for the Feynman diagram that was specified in step 1. 
+\item To begin generating the IBP two variables need to be specified. For instance if you want the IBP which relates to the internal momenta one would input "k,k" (the first term will be referred to as x and the second y). Looping through it takes the derivative of the first propagator with respect to x and then that line will be multiplied by y. This term is stored in the variable called input.
+\item In a temporary variable (called temp) the squares of terms which contain units of momentum squared are stored respecting the order which was specified in step 1. 
+\item Earlier on in step 1 a variable which stored each term with units of momentum squared in a vector was defined and called squares. At this point we append to the temp variable which was defined in step 6 to input - temp(dot)squares.
+\item Now with the temp from step 7 dot this vector with the matrix form step 1. At this point is a matter of piecing everything together. All terms before the last term in this vector will be annihilation operators which effect the propagator with respect to the index. For instance if we are left with $(1,0,1,-p_1^2)$ the first term would be a annihilation operator for the first propagator and the third for the third propagator. Now we sum over this vector and multiply the entire thing by a factor of the exponent of the propagator which we took the derivative of in step 5. Also this entire thing also gets multiplied by a creation operator for the same index. (So if this was for the first propagator it would get a creation operator for index 1 and a factor of the exponent a(1)). 
+\item This is done for every propagator which each output is summed together. Lastly taking the derivative of the two inputs (y with respect to x) and multiplying with by d (for the number of dimensions) is the last bit which is added on. 
+\end{enumerate}
+\end{center}
+
+
+
+\tb{}
+ 
+ 
+
+\bibliography{DefNotReduze}
+
+\end{document} 

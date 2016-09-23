@@ -1,0 +1,6 @@
+\tocdepth@munge 
+\contentsline {section}{\numberline {}Contents}{1}{section*.1}
+\tocdepth@restore 
+\contentsline {section}{\numberline {I}Introduction}{2}{section*.2}
+\contentsline {section}{\numberline {II}The Algorithm}{2}{section*.3}
+\contentsline {subsection}{\numberline {A}IBP Generation}{2}{section*.4}
