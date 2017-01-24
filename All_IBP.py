@@ -22,10 +22,10 @@ print(External)
 
 _IBP=IBP()
 
-for i in range(len(External)):
-	for j in range(len(Internal)):
-		print(External[i],Internal[j])
-		print(_IBP.Get_IBP(External[i],Internal[j]))
+for i in range(len(Internal)):
+	for j in range(len(External)):
+		print(Internal[i],External[j])
+		print(_IBP.Get_IBP(Internal[i],External[j]))
 		
 		
 		#print(_IBP.get_math_output()[1][0].get_index())
